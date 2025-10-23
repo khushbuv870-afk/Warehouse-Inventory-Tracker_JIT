@@ -1,18 +1,19 @@
 public class Product {
-    private String productId;
+    private String id;
     private String name;
     private int quantity;
     private int reorderThreshold;
 
-    public Product(String productId, String name, int quantity, int reorderThreshold) {
-        this.productId = productId;
+    public Product(String id, String name, int quantity, int reorderThreshold) {
+        this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.reorderThreshold = reorderThreshold;
     }
 
-    public String getProductId() {
-        return productId;
+    // Getters
+    public String getId() {
+        return id;
     }
 
     public String getName() {
@@ -27,7 +28,15 @@ public class Product {
         return reorderThreshold;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    // Update stock
+    public void increaseQuantity(int amount) {
+        quantity += amount;
+    }
+
+    public void decreaseQuantity(int amount) {
+        if (amount > quantity) {
+            throw new IllegalArgumentException("Not enough stock available!");
+        }
+        quantity -= amount;
     }
 }
